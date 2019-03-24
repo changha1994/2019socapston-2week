@@ -61,7 +61,7 @@ void connectWifi()
 void sendTeperatureTS(float temp)
 {  
   
-   if (client.connect(server, 80)) { // use ip 184.106.153.149 or api.thingspeak.com
+   if (client.connect(server, 80)) { // use ip or api.thingspeak.com
    Serial.println("WiFi Client connected ");
    
    String postStr = apiKey;
@@ -88,23 +88,11 @@ void sendTeperatureTS(float temp)
 
 void sendTeperatureTStoMyServer(float temp)
 {  
-   if (client.connect("3.18.215.55", 9000)) { // use ip 184.106.153.149 or api.thingspeak.com
+   if (client.connect("3.18.215.55", 9000)) { // use ip or api.thingspeak.com
    Serial.println("WiFi Client connected (http) ");
    
    String postStr = "value=";
    postStr += String(temp);
-
-   /*
-   client.print(String("GET /log HTTP/1.1\r\n") +
-                "Host: 18.225.7.57\r\n" +
-                "Connection: close\r\n" +
-                "Content-Type: application/x-www-form-urlencoded\r\n" +
-
-                "Content-Length: " +
-                String(postStr.length()) +
-                "\n\n" + 
-                postStr); */
-
    client.print(String("GET /log?") + postStr + 
                 " HTTP/1.1\r\n" + 
                 "Host: 3.18.215.55\r\n" + 
